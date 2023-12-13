@@ -1,0 +1,82 @@
+C:\Users\Omar Hisham\source\repos\web project asp\bin\web project asp.dll.config
+C:\Users\Omar Hisham\source\repos\web project asp\bin\web project asp.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\web project asp.pdb
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\csc.exe
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\csc.exe.config
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\csc.rsp
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\csi.exe
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\csi.exe.config
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\csi.rsp
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.AppContext.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Console.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.IO.Compression.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Net.Http.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Net.Sockets.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.ValueTuple.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\vbc.exe
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\vbc.exe.config
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\vbc.rsp
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\VBCSCompiler.exe
+C:\Users\Omar Hisham\source\repos\web project asp\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Antlr3.Runtime.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\AspNet.ScriptManager.bootstrap.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\AspNet.ScriptManager.jQuery.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.AspNet.FriendlyUrls.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.ScriptManager.MSAjax.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.ScriptManager.WebForms.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Newtonsoft.Json.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\System.Web.Optimization.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\WebGrease.dll
+C:\Users\Omar Hisham\source\repos\web project asp\bin\System.Web.Optimization.xml
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Newtonsoft.Json.xml
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Antlr3.Runtime.pdb
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.AspNet.FriendlyUrls.xml
+C:\Users\Omar Hisham\source\repos\web project asp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Omar Hisham\source\repos\web project asp\obj\Debug\web project asp.csproj.AssemblyReference.cache
+C:\Users\Omar Hisham\source\repos\web project asp\obj\Debug\web project asp.csproj.CoreCompileInputs.cache
+C:\Users\Omar Hisham\source\repos\web project asp\obj\Debug\web project asp.csproj.CopyComplete
+C:\Users\Omar Hisham\source\repos\web project asp\obj\Debug\web project asp.dll
+C:\Users\Omar Hisham\source\repos\web project asp\obj\Debug\web project asp.pdb
+C:\Users\Omar Hisham\Desktop\git uploads\fruit-shop\obj\Debug\web project asp.csproj.AssemblyReference.cache
+C:\Users\Omar Hisham\Desktop\git uploads\fruit-shop\obj\Debug\web project asp.csproj.CoreCompileInputs.cache
+C:\Users\Omar Hisham\Desktop\git uploads\fruit-shop\obj\Debug\web project asp.dll
+C:\Users\Omar Hisham\Desktop\git uploads\fruit-shop\obj\Debug\web project asp.pdb
+C:\Users\lenovo\Desktop\fruit\fruit-shop\obj\Debug\web project asp.csproj.AssemblyReference.cache
+C:\Users\lenovo\Desktop\fruit\fruit-shop\obj\Debug\web project asp.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\Desktop\fruit\fruit-shop\obj\Debug\web project asp.dll
+C:\Users\lenovo\Desktop\fruit\fruit-shop\obj\Debug\web project asp.pdb
