@@ -29,9 +29,13 @@
         <asp:BoundField DataField="city" HeaderText="City" />
         <asp:BoundField DataField="IsAdmin" HeaderText="Is Admin" />
         <asp:TemplateField HeaderText="Actions">
-            <ItemTemplate>
-                <asp:Button ID="addAdminButton" runat="server" Text="Add Admin" CommandName="AddAdmin" Visible="False" OnClick="addAdminButton_Click" />
-                <asp:Button ID="removeAdminButton" runat="server" Text="Remove Admin" CommandName="RemoveAdmin" Visible="False" OnClick="removeAdminButton_Click" />
+             <ItemTemplate>
+                <asp:Button ID="addAdminButton" runat="server" Text="Add Admin" CommandName="AddAdmin" 
+                    Visible='<%# Eval("IsAdmin").ToString().ToLower() == "false" %>' 
+                    CssClass="btn btn-success" /> <!-- Green color for Add Admin -->
+                <asp:Button ID="removeAdminButton" runat="server" Text="Remove Admin" CommandName="RemoveAdmin" 
+                    Visible='<%# Eval("IsAdmin").ToString().ToLower() == "true" %>' 
+                    CssClass="btn btn-danger" /> <!-- Red color for Remove Admin -->
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>

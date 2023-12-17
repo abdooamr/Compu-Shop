@@ -43,9 +43,10 @@ public partial class adminproducts : System.Web.UI.Page
         }
         else
         {
-            // Handle errors when no file is uploaded or category not found
-            // You can display an error message or handle it as desired
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please upload a file and select a valid category.');", true);
         }
+
+
     }
 
     private int GetCategoryId(string categoryName)

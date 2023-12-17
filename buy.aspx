@@ -16,6 +16,7 @@
                 <div>
                     <label>Product Price:</label>
                     <asp:Label ID="lblProductPrice" runat="server" Text=""></asp:Label>
+                    
                 </div>
                 <div>
                     <form runat="server">
@@ -33,10 +34,10 @@
                 </div>
             </div>
         </div>
-        <div>
-            <label>Product ID:</label>
-            <asp:Label ID="lblProductId" runat="server" Text=""></asp:Label>
-        </div>
+       <div runat="server" id="productDiv">
+     <label>Product ID:</label>
+     <asp:Label ID="lblProductId" runat="server" Text=""></asp:Label>
+</div>
         <div class="message">
             <asp:Label ID="lblSuccessMessage" runat="server" Text=""></asp:Label>
             <asp:Label ID="lblErrorMessage" runat="server" Text="" CssClass="error-message"></asp:Label>

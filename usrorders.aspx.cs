@@ -9,6 +9,10 @@ public partial class usrorders : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["CustomerId"] == null)
+        {
+            Response.Redirect("login.aspx");
+        }
         if (!IsPostBack)
         {
             BindOrders();
@@ -18,7 +22,15 @@ public partial class usrorders : System.Web.UI.Page
     {
         int customerId = int.Parse(Session["CustomerId"].ToString());
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-        string query = "SELECT order_id, customer_name, product, address, quantity, total_price FROM [order] Where customer_id=@customerId ";
+
+        // Modify the SQL query to join 'order' table with 'Product' table to get product_name
+        string query = "SELECT o.order_id, c.FirstName + ' ' + c.LastName AS customer_name, p.product_name AS product, " +
+                       "o.address, o.quantity, o.total_price " +
+                       "FROM [order] o " +
+                       "INNER JOIN Product p ON o.product_id = p.product_id " +
+                       "INNER JOIN Customers c ON o.customer_id = c.CustomerId " +
+                       "WHERE o.customer_id = @customerId";
+
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             SqlCommand command = new SqlCommand(query, connection);
@@ -33,6 +45,8 @@ public partial class usrorders : System.Web.UI.Page
         }
     }
 
+
+
     protected void backButton_Click(object sender, EventArgs e)
     {
         Response.Redirect("index.aspx");
@@ -43,9 +57,9 @@ public partial class usrorders : System.Web.UI.Page
         // Get the ID of the order to be deleted
         int orderId = Convert.ToInt32(customersGridView.DataKeys[e.RowIndex].Value);
 
-        // Fetch order details including product and quantity
+        // Fetch order details including product_id and quantity
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-        string getOrderDetailsQuery = "SELECT product, quantity FROM [order] WHERE order_id = @OrderId";
+        string getOrderDetailsQuery = "SELECT product_id, quantity FROM [order] WHERE order_id = @OrderId";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             SqlCommand getOrderDetailsCommand = new SqlCommand(getOrderDetailsQuery, connection);
@@ -54,12 +68,12 @@ public partial class usrorders : System.Web.UI.Page
             connection.Open();
             SqlDataReader reader = getOrderDetailsCommand.ExecuteReader();
 
-            string productName = "";
+            int productId = 0;
             int quantity = 0;
 
             if (reader.Read())
             {
-                productName = reader["product"].ToString();
+                productId = Convert.ToInt32(reader["product_id"]);
                 quantity = Convert.ToInt32(reader["quantity"]);
             }
 
@@ -75,10 +89,10 @@ public partial class usrorders : System.Web.UI.Page
             if (rowsAffected > 0)
             {
                 // Update the product's stock in the Products table
-                string updateStockQuery = "UPDATE Product SET stock = stock + @Quantity WHERE product_name = @ProductName";
+                string updateStockQuery = "UPDATE Product SET stock = stock + @Quantity WHERE product_id = @ProductId";
                 SqlCommand updateStockCommand = new SqlCommand(updateStockQuery, connection);
                 updateStockCommand.Parameters.AddWithValue("@Quantity", quantity);
-                updateStockCommand.Parameters.AddWithValue("@ProductName", productName);
+                updateStockCommand.Parameters.AddWithValue("@ProductId", productId);
                 updateStockCommand.ExecuteNonQuery();
 
                 // Refresh the GridView to reflect the changes
@@ -91,5 +105,6 @@ public partial class usrorders : System.Web.UI.Page
             }
         }
     }
+
 
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace web_project_asp
 {
@@ -11,7 +8,12 @@ namespace web_project_asp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Exception ex = Server.GetLastError();
+            if (ex is HttpException httpEx && httpEx.GetHttpCode() == 404)
+            {
+                // Redirect to index.aspx for a 404 error
+                Response.Redirect("~/index.aspx");
+            }
         }
     }
 }

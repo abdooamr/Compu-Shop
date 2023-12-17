@@ -18,6 +18,16 @@ public partial class buy : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {   try 
        {
+            bool shouldHideDiv = true;
+
+            if (shouldHideDiv)
+            {
+                productDiv.Visible = false; // productDiv is the ID of the div containing the label
+            }
+            else
+            {
+                productDiv.Visible = true;
+            }
             if (Session["CustomerId"] == null)
             {
                 Response.Redirect("login.aspx");
@@ -73,11 +83,11 @@ public partial class buy : System.Web.UI.Page
         int quantity = Convert.ToInt32(quantityy.Text); 
 
         
-        decimal totalPrice = Convert.ToDecimal(productPrice) * quantity;
+        double totalPrice = Convert.ToDouble(productPrice) * quantity;
 
        
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        string query = "INSERT INTO cart (customerid, product, quantity, total_price) VALUES (@custid, @ProductName, @quantity, @totalPrice)";
+        string query = "INSERT INTO cart (customerid, product_id , quantity, total_price) VALUES (@custid, @productId, @quantity, @totalPrice)";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -86,7 +96,7 @@ public partial class buy : System.Web.UI.Page
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@custid", custid);
-                command.Parameters.AddWithValue("@ProductName", productName);
+                command.Parameters.AddWithValue("@productId", productId);
                 command.Parameters.AddWithValue("@quantity", quantity);
                 command.Parameters.AddWithValue("@totalPrice", totalPrice);
 
@@ -130,36 +140,3 @@ public partial class buy : System.Web.UI.Page
 
 
 }
-
-
-/*
-        // Retrieve the product name from the page
-        string productName = lblProductName.Text;
-
-        // Retrieve the quantity value
-        decimal quantity = decimal.Parse(quantityy.Text);
-
-        // Retrieve the product price
-        decimal price = decimal.Parse(lblProductPrice.Text);
-
-        // Calculate the total price
-        decimal totalPrice = price * quantity;
-
-        // Retrieve the customer ID from the session (assuming you have the customer ID stored in the session)
-        int customerId = (int)Session["CustomerId"];
-
-        // Insert the data into the database table (assuming you have a valid database connection)
-        using (SqlConnection connection = new SqlConnection("your_connection_string"))
-        {
-            connection.Open();
-            SqlCommand command = new SqlCommand("INSERT INTO cart (customerid, product, quantity, total_price) VALUES (@customerId, @productName, @quantity, @totalPrice)", connection);
-            command.Parameters.AddWithValue("@customerId", customerId);
-            command.Parameters.AddWithValue("@productName", productName);
-            command.Parameters.AddWithValue("@quantity", quantity);
-            command.Parameters.AddWithValue("@totalPrice", totalPrice);
-            command.ExecuteNonQuery();
-        }
-
-        // Clear the quantity input field after adding to cart
-        quantity.Text = "1";*/
-

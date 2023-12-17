@@ -20,15 +20,20 @@
                             <div class="contact_form-container">
                                 <div>
                                     <asp:GridView ID="customersGridView" runat="server" AutoGenerateColumns="False" OnRowDeleting="customersGridView_RowDeleting" DataKeyNames="order_id">
-                                        <Columns>
-                                            <asp:BoundField DataField="customer_name" HeaderText="Customer Name" />
-                                            <asp:BoundField DataField="product" HeaderText="Product" />
-                                            <asp:BoundField DataField="address" HeaderText="Address" />
-                                            <asp:BoundField DataField="quantity" HeaderText="Quantity" />
-                                            <asp:BoundField DataField="total_price" HeaderText="Total Price" />
-                                            <asp:CommandField ShowDeleteButton="True" ButtonType="Button" DeleteText="Delete order" />
-                                        </Columns>
-                                    </asp:GridView>
+    <Columns>
+        <asp:BoundField DataField="customer_name" HeaderText="Customer Name" />
+        <asp:BoundField DataField="product" HeaderText="Product" />
+        <asp:BoundField DataField="address" HeaderText="Address" />
+        <asp:BoundField DataField="quantity" HeaderText="Quantity" />
+        <asp:BoundField DataField="total_price" HeaderText="Total Price" />
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:LinkButton runat="server" CommandName="Delete" Text="Delete" OnClientClick="return confirm('Are you sure you want to delete this order?');" CommandArgument='<%# Container.DataItemIndex %>' CssClass="btn btn-danger btn-sm" />
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+
                                     <br />
                                     <asp:Label ID="Label1" runat="server" Text="" ></asp:Label>
                                     <br />

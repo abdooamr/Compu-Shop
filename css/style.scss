@@ -694,3 +694,37 @@ table.w-100 {
         .update-button:hover {
             background-color: #0056b3;
         }
+/* Style for the GridView */
+#productsGridView {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Style for table header */
+#productsGridView th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Style for table data */
+#productsGridView td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Style for the restock input and button */
+#productsGridView input[type="text"],
+#productsGridView input[type="button"] {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+/* Style for success message label */
+.success-message {
+    color: green;
+    font-weight: bold;
+}

@@ -888,3 +888,72 @@ button:hover:after {
         flex-basis: 50%;
     }
 }
+/* Style for the GridView */
+#productsGridView {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    /* Style for table header */
+    #productsGridView th {
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    /* Style for table data */
+    #productsGridView td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    /* Style for the restock input and button */
+    #productsGridView input[type="text"],
+    #productsGridView input[type="button"] {
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+    }
+
+/* Style for success message label */
+.success-message {
+    color: green;
+    font-weight: bold;
+}
+/* CSS for the DropDownList */
+#brandDropdown:hover {
+    border-color: #007bff; /* Change border color on hover to a professional blue color */
+    background-color: #f8f9fa; /* Change background color on hover */
+    color: #000; /* Change text color on hover */
+}
+/* Style for the sort buttons */
+.btn-sort {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+    .btn-sort:hover {
+        background-color: #f0f0f0;
+        border-color: #999;
+        color: #000;
+    }
+
+    /* Style for the selected sort button */
+    .btn-sort.active {
+        background-color: #007bff; /* Example color for active state */
+        border-color: #007bff;
+        color: #fff;
+    }
+
+
+
+

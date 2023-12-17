@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
     <title>Compu Shop</title>
+    <link rel="icon" href="images/logo-color.png" sizes="32*32"type="image/png">
      <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -160,7 +161,7 @@
             <div class="footer-column">
                 <h3>Contact Us</h3>
                 <ul>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
                 </ul>
             </div>
         </div>

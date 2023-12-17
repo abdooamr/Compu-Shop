@@ -22,7 +22,11 @@ public partial class adminvieworders : System.Web.UI.Page
     private void BindOrders()
     {
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-        string query = "SELECT order_id, customer_name, product, address, quantity, total_price FROM [order]";
+        string query = "SELECT o.order_id, c.FirstName + ' ' + c.LastName AS customer_name, p.product_name AS product, " +
+                       "o.address, o.quantity, o.total_price " +
+                       "FROM [order] o " +
+                       "INNER JOIN Product p ON o.product_id = p.product_id " +
+                       "INNER JOIN Customers c ON o.customer_id = c.CustomerId";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             SqlCommand command = new SqlCommand(query, connection);

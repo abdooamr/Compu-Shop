@@ -1,21 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.Optimization;
-using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace web_project_asp
 {
     public class Global : HttpApplication
     {
-        void Application_Start(object sender, EventArgs e)
+        // Other events and methods...
+
+        protected void Application_Error(object sender, EventArgs e)
         {
-            // Code that runs on application startup
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            // Get the last error from the server
+            Exception exception = Server.GetLastError();
+
+            // Log the error (you can implement your own logging mechanism here)
+            // For example, log the exception to a file, database, or external service
+            // Logging.Log(exception);
+
+            // Clear the error to prevent further handling by the default handler
+            Server.ClearError();
+
+            // Redirect to a custom error page
+            Response.Redirect("index.aspx");
         }
     }
 }

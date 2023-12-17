@@ -1,56 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Configuration;
-using System.Web.SessionState;
+using System.Web.UI.WebControls;
 
 public partial class cart : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-      
-            if (Session["CustomerId"] == null)
-            {
-                Response.Redirect("login.aspx");
-            }
-            else
-       if (!IsPostBack)
+        if (Session["CustomerId"] == null)
+        {
+            Response.Redirect("login.aspx");
+        }
+        else if (!IsPostBack)
         {
             int customerId = int.Parse(Session["CustomerId"].ToString());
-            // Retrieve cart data from the database or any other source
             DataTable cartData = GetCartData(customerId);
 
-            // Bind the cart data to the GridView
             customersGridView.DataSource = cartData;
             customersGridView.DataBind();
         }
-
     }
+
     protected void btnPlaceOrder_Click(object sender, EventArgs e)
     {
         int customerId = int.Parse(Session["CustomerId"].ToString());
 
-        InsertOrder(customerId);
+        DataTable cartData = GetCartData(customerId);
+        bool insufficientStock = false;
 
-        ClearCart(customerId);
+        foreach (DataRow row in cartData.Rows)
+        {
+            int productId = Convert.ToInt32(row["product_id"]);
+            int quantity = int.Parse(row["Quantity"].ToString());
+            int currentStock = GetCurrentStock(productId);
 
-        lblOrderStatus.Text = "Order placed successfully";
-        lblOrderStatus.ForeColor = System.Drawing.Color.Green;
-        lblOrderStatus.Visible = true;
-        customersGridView.DataSource = null;
-        customersGridView.DataBind();
-        Response.Redirect("usrorders.aspx");
+            if (currentStock < quantity)
+            {
+                insufficientStock = true;
+                string productName = row["ProductName"].ToString();
+                string errorMessage = $"Insufficient stock for {productName}. Available stock: {currentStock}";
+                lblOrderStatus.Text = errorMessage;
+                lblOrderStatus.ForeColor = System.Drawing.Color.Red;
+                lblOrderStatus.Visible = true;
+                break;
+            }
+        }
 
+        if (!insufficientStock)
+        {
+            InsertOrder(customerId);
+            ClearCart(customerId);
+            lblOrderStatus.Text = "Order placed successfully";
+            lblOrderStatus.ForeColor = System.Drawing.Color.Green;
+            lblOrderStatus.Visible = true;
+            Response.Redirect("usrorders.aspx");
+        }
     }
+
     protected void backButton_Click(object sender, EventArgs e)
     {
         Response.Redirect("shop.aspx");
     }
+
+    protected void customersGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        int rowIndex = e.RowIndex;
+        int customerId = int.Parse(Session["CustomerId"].ToString());
+
+        DataTable cartData = GetCartData(customerId);
+
+        if (cartData.Rows.Count > rowIndex)
+        {
+            cartData.Rows[rowIndex].Delete();
+            customersGridView.DataSource = cartData;
+            customersGridView.DataBind();
+
+            ClearCart(customerId);
+        }
+    }
+
     private void InsertOrder(int customerId)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
@@ -58,20 +88,16 @@ public partial class cart : System.Web.UI.Page
         {
             connection.Open();
 
-            // Retrieve cart items for the customer including product details
             DataTable cartData = GetCartData(customerId);
 
-            // Get customer name and address from the Customers table
-            string customerName = string.Empty;
             string customerAddress = string.Empty;
-            string customerQuery = "SELECT FirstName, Address FROM Customers WHERE CustomerId = @CustomerId";
+            string customerQuery = "SELECT Address FROM Customers WHERE CustomerId = @CustomerId";
             SqlCommand customerCommand = new SqlCommand(customerQuery, connection);
             customerCommand.Parameters.AddWithValue("@CustomerId", customerId);
             SqlDataReader customerReader = customerCommand.ExecuteReader();
 
             if (customerReader.Read())
             {
-                customerName = customerReader["FirstName"].ToString();
                 customerAddress = customerReader["Address"].ToString();
             }
 
@@ -79,49 +105,52 @@ public partial class cart : System.Web.UI.Page
 
             foreach (DataRow row in cartData.Rows)
             {
+                int productId = Convert.ToInt32(row["product_id"]);
                 string productName = row["ProductName"].ToString();
                 int quantity = int.Parse(row["Quantity"].ToString());
                 decimal totalPrice = decimal.Parse(row["TotalPrice"].ToString());
 
-                // Fetch current stock for the product
-                string stockQuery = "SELECT stock FROM Product WHERE product_name = @ProductName";
+                string stockQuery = "SELECT stock FROM Product WHERE product_id = @ProductId";
                 SqlCommand stockCommand = new SqlCommand(stockQuery, connection);
-                stockCommand.Parameters.AddWithValue("@ProductName", productName);
+                stockCommand.Parameters.AddWithValue("@ProductId", productId);
                 int currentStock = Convert.ToInt32(stockCommand.ExecuteScalar());
 
                 if (currentStock >= quantity)
                 {
-                    // Reduce the stock after the order
                     int updatedStock = currentStock - quantity;
 
-                    // Perform the stock update query
-                    string updateStockQuery = "UPDATE Product SET stock = @UpdatedStock WHERE product_name = @ProductName";
+                    string updateStockQuery = "UPDATE Product SET stock = @UpdatedStock WHERE product_id = @ProductId";
                     SqlCommand updateStockCommand = new SqlCommand(updateStockQuery, connection);
                     updateStockCommand.Parameters.AddWithValue("@UpdatedStock", updatedStock);
-                    updateStockCommand.Parameters.AddWithValue("@ProductName", productName);
+                    updateStockCommand.Parameters.AddWithValue("@ProductId", productId);
                     updateStockCommand.ExecuteNonQuery();
-
-                    // Insert order details
-                    string orderQuery = "INSERT INTO [Order] (customer_id, customer_name, address, product, quantity, total_price) VALUES (@CustomerId, @CustomerName, @CustomerAddress, @Product, @Quantity, @TotalPrice)";
-                    SqlCommand command = new SqlCommand(orderQuery, connection);
-                    command.Parameters.AddWithValue("@CustomerId", customerId);
-                    command.Parameters.AddWithValue("@CustomerName", customerName);
-                    command.Parameters.AddWithValue("@CustomerAddress", customerAddress);
-                    command.Parameters.AddWithValue("@Product", productName);
-                    command.Parameters.AddWithValue("@Quantity", quantity);
-                    command.Parameters.AddWithValue("@TotalPrice", totalPrice);
-                    command.ExecuteNonQuery();
                 }
                 else
                 {
-                    // Handle insufficient stock scenario (notify the user, log, etc.)
-                    // For example:
-                    // Response.Write("Insufficient stock for product: " + productName);
+                    string errorMessage = $"Insufficient stock for {productName}. Available stock: {currentStock}";
+                    lblOrderStatus.Text = errorMessage;
+                    lblOrderStatus.ForeColor = System.Drawing.Color.Red;
+                    lblOrderStatus.Visible = true;
+
+
                 }
+
+                // Insert order details for each item in the cart
+                string orderQuery = "INSERT INTO [order] (customer_id, product_id, address, quantity, total_price) " +
+                    "VALUES (@CustomerId, @ProductId, @CustomerAddress, @Quantity, @TotalPrice)";
+                SqlCommand command = new SqlCommand(orderQuery, connection);
+                command.Parameters.AddWithValue("@CustomerId", customerId);
+                command.Parameters.AddWithValue("@ProductId", productId);
+                command.Parameters.AddWithValue("@CustomerAddress", customerAddress);
+                command.Parameters.AddWithValue("@Quantity", quantity);
+                command.Parameters.AddWithValue("@TotalPrice", totalPrice);
+                command.ExecuteNonQuery();
             }
+
+            // Clear the cart after processing all items
+            ClearCart(customerId);
         }
     }
-
 
 
 
@@ -132,7 +161,6 @@ public partial class cart : System.Web.UI.Page
         {
             connection.Open();
 
-            // Perform the delete query to remove the cart items for the customer
             string query = "DELETE FROM cart WHERE customerid = @CustomerId";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@CustomerId", customerId);
@@ -150,7 +178,11 @@ public partial class cart : System.Web.UI.Page
         {
             connection.Open();
 
-            string query = "SELECT product AS ProductName, quantity AS Quantity, total_price AS TotalPrice FROM cart WHERE customerid = @CustomerId";
+            string query = "SELECT c.product_id, p.product_name AS ProductName, c.quantity AS Quantity, c.total_price AS TotalPrice " +
+               "FROM cart c " +
+               "INNER JOIN Product p ON c.product_id = p.product_id " +
+               "WHERE c.customerid = @CustomerId";
+
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@CustomerId", customerId);
 
@@ -160,30 +192,27 @@ public partial class cart : System.Web.UI.Page
 
         return cartData;
     }
-    protected void customersGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+
+    private int GetCurrentStock(int productId)
     {
-        int rowIndex = e.RowIndex;
+        int currentStock = 0;
+        string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
-        // Assuming you have stored the customerId somewhere accessible
-        int customerId = int.Parse(Session["CustomerId"].ToString());
-
-        // Retrieve cart data
-        DataTable cartData = GetCartData(customerId);
-
-        // Remove the selected item from the cart DataTable
-        if (cartData.Rows.Count > rowIndex)
+        using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            cartData.Rows[rowIndex].Delete();
+            connection.Open();
 
-            // Update the cart display
-            customersGridView.DataSource = cartData;
-            customersGridView.DataBind();
+            string stockQuery = "SELECT stock FROM Product WHERE product_id = @ProductId";
+            SqlCommand stockCommand = new SqlCommand(stockQuery, connection);
+            stockCommand.Parameters.AddWithValue("@ProductId", productId);
+            object result = stockCommand.ExecuteScalar();
 
-            // Clear the entire cart and update the database
-            ClearCart(customerId);
-           
+            if (result != null && result != DBNull.Value)
+            {
+                currentStock = Convert.ToInt32(result);
+            }
         }
+
+        return currentStock;
     }
-
-
 }

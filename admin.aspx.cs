@@ -15,7 +15,11 @@ public partial class admin : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["isAdmin"] == null || !(bool)Session["isAdmin"])
+        {
+            // Redirect the user to the login page or any other appropriate page
+            Response.Redirect("login.aspx");
+        }
     }
     protected void Admin_Click(object sender, EventArgs e)
     {
