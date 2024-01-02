@@ -29,10 +29,11 @@
 
 
                                     <div>
-                                         <asp:Button ID="usersbutton" runat="server"  Text="View Customers" OnClick="adcustomerview_Click"/>
-                                         <asp:Button ID="productsButton" runat="server"  Text="Add Products"  OnClick="adminproducts_Click" />
-                                         <asp:Button ID="restockButton" runat="server"  Text="Restock Products"  OnClick="adminrestock_Click" />
-                                         <asp:Button ID="ordersButton" runat="server"  Text="View Orders" OnClick="adminview_Click"/>
+                                         <asp:Button ID="usersbutton" runat="server" Text="View Customers" OnClick="adcustomerview_Click" CssClass="custom-button" />
+                                         <asp:Button ID="productsButton" runat="server" Text="Add Products" OnClick="adminproducts_Click" CssClass="custom-button" />
+                                         <asp:Button ID="restockButton" runat="server" Text="Restock Products" OnClick="adminrestock_Click" CssClass="custom-button" />
+                                         <asp:Button ID="ordersButton" runat="server" Text="View Orders" OnClick="adminview_Click" CssClass="custom-button" />
+
 
                                          
                                     </div>

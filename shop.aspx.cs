@@ -22,6 +22,7 @@ public partial class _Default : System.Web.UI.Page
             brandDropdown.Visible = false;
             brandLabel.Visible = false;
             btnLowToHigh.Visible = false;
+            btnHighToLow.Visible = false;
             whereClause.Append(" WHERE category_id = @CategoryId");
         }
         else

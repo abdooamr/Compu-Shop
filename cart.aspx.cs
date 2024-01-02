@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -50,7 +49,9 @@ public partial class cart : System.Web.UI.Page
 
         if (!insufficientStock)
         {
-            InsertOrder(customerId);
+            string selectedPaymentType = paymentTypeRadioButtonList.SelectedValue;
+            InsertOrder(customerId, selectedPaymentType);
+
             ClearCart(customerId);
             lblOrderStatus.Text = "Order placed successfully";
             lblOrderStatus.ForeColor = System.Drawing.Color.Green;
@@ -81,7 +82,7 @@ public partial class cart : System.Web.UI.Page
         }
     }
 
-    private void InsertOrder(int customerId)
+    private void InsertOrder(int customerId, string paymentType)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
         using (SqlConnection connection = new SqlConnection(connectionString))
@@ -131,19 +132,19 @@ public partial class cart : System.Web.UI.Page
                     lblOrderStatus.Text = errorMessage;
                     lblOrderStatus.ForeColor = System.Drawing.Color.Red;
                     lblOrderStatus.Visible = true;
-
-
+                    return; // Exit the method if insufficient stock
                 }
 
                 // Insert order details for each item in the cart
-                string orderQuery = "INSERT INTO [order] (customer_id, product_id, address, quantity, total_price) " +
-                    "VALUES (@CustomerId, @ProductId, @CustomerAddress, @Quantity, @TotalPrice)";
+                string orderQuery = "INSERT INTO [order] (customer_id, product_id, address, quantity, total_price, payment_type) " +
+                    "VALUES (@CustomerId, @ProductId, @CustomerAddress, @Quantity, @TotalPrice, @PaymentType)";
                 SqlCommand command = new SqlCommand(orderQuery, connection);
                 command.Parameters.AddWithValue("@CustomerId", customerId);
                 command.Parameters.AddWithValue("@ProductId", productId);
                 command.Parameters.AddWithValue("@CustomerAddress", customerAddress);
                 command.Parameters.AddWithValue("@Quantity", quantity);
                 command.Parameters.AddWithValue("@TotalPrice", totalPrice);
+                command.Parameters.AddWithValue("@PaymentType", paymentType);
                 command.ExecuteNonQuery();
             }
 
@@ -151,8 +152,6 @@ public partial class cart : System.Web.UI.Page
             ClearCart(customerId);
         }
     }
-
-
 
     private void ClearCart(int customerId)
     {
@@ -164,7 +163,6 @@ public partial class cart : System.Web.UI.Page
             string query = "DELETE FROM cart WHERE customerid = @CustomerId";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@CustomerId", customerId);
-
             command.ExecuteNonQuery();
         }
     }
