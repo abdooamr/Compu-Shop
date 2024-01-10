@@ -16,8 +16,9 @@ using System.Web.SessionState;
 public partial class buy : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
-    {   try 
-       {
+    {
+        try
+        {
             bool shouldHideDiv = true;
 
             if (shouldHideDiv)
@@ -33,28 +34,28 @@ public partial class buy : System.Web.UI.Page
                 Response.Redirect("login.aspx");
             }
             if (!IsPostBack)
-        {
-            string productId = Request.QueryString["product"];
-            lblProductId.Text = productId;
-
-            // Retrieve product details from the database
-            string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            string query = "SELECT product_name, price , image_url FROM Product WHERE product_id = @ProductID";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
+                string productId = Request.QueryString["product"];
+                lblProductId.Text = productId;
 
-                using (SqlCommand command = new SqlCommand(query, connection))
+                // Retrieve product details from the database
+                string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                string query = "SELECT product_name, price , image_url FROM Product WHERE product_id = @ProductID";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@ProductID", productId);
+                    connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@ProductID", productId);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            string productName = reader["product_name"].ToString();
-                            string productPrice = reader["price"].ToString();
+                            if (reader.Read())
+                            {
+                                string productName = reader["product_name"].ToString();
+                                string productPrice = reader["price"].ToString();
                                 string imageUrl = reader["image_url"].ToString();
 
                                 lblProductName.Text = productName;
@@ -62,11 +63,11 @@ public partial class buy : System.Web.UI.Page
                                 imgProduct.ImageUrl = imageUrl;
 
                             }
+                        }
                     }
                 }
             }
         }
-       }
         catch (Exception ex)
         {
             // Log the exception or display an error message
@@ -80,12 +81,12 @@ public partial class buy : System.Web.UI.Page
         string productName = lblProductName.Text;
         string productPrice = lblProductPrice.Text;
         int custid = Convert.ToInt32(Session["CustomerId"]);
-        int quantity = Convert.ToInt32(quantityy.Text); 
+        int quantity = Convert.ToInt32(quantityy.Text);
 
-        
+
         double totalPrice = Convert.ToDouble(productPrice) * quantity;
 
-       
+
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         string query = "INSERT INTO cart (customerid, product_id , quantity, total_price) VALUES (@custid, @productId, @quantity, @totalPrice)";
 
@@ -104,17 +105,17 @@ public partial class buy : System.Web.UI.Page
             }
         }
 
-       
+
         lblSuccessMessage.Text = "Product added to cart successfully!";
 
-        
+
         Response.Redirect("cart.aspx");
-    
 
-    
-    lblSuccessMessage.Text = "Product added to cart successfully!";
 
-      
+
+        lblSuccessMessage.Text = "Product added to cart successfully!";
+
+
         Response.Redirect("cart.aspx");
     }
     protected void QuantityZeroValidator_ServerValidate(object source, ServerValidateEventArgs args)

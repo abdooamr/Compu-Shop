@@ -5,173 +5,171 @@
 <html>
 <head runat="server">
     <title>Compu Shop</title>
-    <link rel="icon" href="images/logo-color.png" sizes="32*32"type="image/png">
-     <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="images/logo-color.png" sizes="32*32" type="image/png">
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-  <!--menu bar--> 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <!--menu bar-->
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
 
-  <!--main style-->
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.1/js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
 
 
-  
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <div>
-    <!-- header section strats -->
-    <div class="brand_box">
-      <a class="navbar-brand" href="index.aspx">
-        <span>
-          Compu Shop
-        </span>
-      </a>
-    </div>
+        <!-- header section strats -->
+        <div class="brand_box">
+            <a class="navbar-brand" href="index.aspx">
+                <span>Compu Shop
+                </span>
+            </a>
         </div>
+    </div>
     <!-- end header section -->
 
-  <!-- nav section -->
-  <section class="nav_section">
-    <div class="container">
-      <div class="custom_nav2">
-        <nav class="navbar navbar-expand custom_nav-container ">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <!-- nav section -->
+    <section class="nav_section">
+        <div class="container">
+            <div class="custom_nav2">
+                <nav class="navbar navbar-expand custom_nav-container ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex  flex-column flex-lg-row align-items-center">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="d-flex  flex-column flex-lg-row align-items-center">
 
-              <ul class="navbar-nav  ">
+                            <ul class="navbar-nav  ">
 
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.aspx">Home <span class="sr-only">(current)</span></a>
-                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="index.aspx">Home <span class="sr-only">(current)</span></a>
+                                </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" href="about.aspx">About </a>
-                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.aspx">About </a>
+                                </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" href="shop.aspx">Shop </a>
-                </li>
-                
-                
-                  <li class="nav-item">
-                  <a class="nav-link" href="search.aspx">Search</a>
-                </li>
-
-                 <% if (Session["CustomerId"] != null ) { %>
-                  <!-- User is logged in, hide the Login/Signup tab -->
-                  <li class="nav-item">
-                    <a class="nav-link" href="cart.aspx">Cart</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="usrorders.aspx">Orders</a>
-                  </li>
-                   
-                  
-                  <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Profile
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                                     <a class="dropdown-item edit-profile" href="editprofile.aspx">Edit Profile</a>
-                                </div>
-                                
-                    </li>
-                  <li class="nav-item">
- <a class="nav-link" href="logout.aspx">Logout</a>
-</li>
-                <% } else { %>
-                  <!-- User is not logged in, show the Login/Signup tab -->
-                  <li class="nav-item">
-                    <a class="nav-link" href="login.aspx">Login/Signup</a>
-                  </li>
-                <% } %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="shop.aspx">Shop </a>
+                                </li>
 
 
-               <% if (Session["isAdmin"] != null && (bool)Session["isAdmin"]) { %>
-                <li id="adminTab" class="nav-item">
-                     <a class="nav-link" href="adminpanel.aspx">Admin Panel</a>
-                </li>
-                <% } %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="search.aspx">Search</a>
+                                </li>
+
+                                <% if (Session["CustomerId"] != null)
+                                    { %>
+                                <!-- User is logged in, hide the Login/Signup tab -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="cart.aspx">Cart</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="usrorders.aspx">Orders</a>
+                                </li>
 
 
-              </ul>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                                        <a class="dropdown-item edit-profile" href="editprofile.aspx">Edit Profile</a>
+                                    </div>
 
-              
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="logout.aspx">Logout</a>
+                                </li>
+                                <% }
+                                    else
+                                    { %>
+                                <!-- User is not logged in, show the Login/Signup tab -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login.aspx">Login/Signup</a>
+                                </li>
+                                <% } %>
+
+
+                                <% if (Session["isAdmin"] != null && (bool)Session["isAdmin"])
+                                    { %>
+                                <li id="adminTab" class="nav-item">
+                                    <a class="nav-link" href="adminpanel.aspx">Admin Panel</a>
+                                </li>
+                                <% } %>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </nav>
             </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </section>
-
-  <!-- end nav section -->
-
-   
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
         </div>
+    </section>
+
+    <!-- end nav section -->
+
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
     <footer class="footer">
-    <div class="footer-inner">
-        <div class="footer-content">
-            <!-- Logo -->
-            <div class="footer-column">
-                <img src="images/logo-no-background.png" alt="Compu Shop Logo" height="150" />
+        <div class="footer-inner">
+            <div class="footer-content">
+                <!-- Logo -->
+                <div class="footer-column">
+                    <img src="images/logo-no-background.png" alt="Compu Shop Logo" height="150" />
+                </div>
+
+                <!-- Hyperlinks -->
+                <div class="footer-column">
+                    <h3>Important Links</h3>
+                    <ul>
+                        <li><a href="index.aspx">Home</a></li>
+                        <li><a href="about.aspx">About</a></li>
+                        <li><a href="shop.aspx">Shop</a></li>
+                        <li><a href="search.aspx">Search</a></li>
+                        <!-- Add more links as needed -->
+                    </ul>
+                </div>
+
+                <!-- Contact Us -->
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="contact.aspx">Contact</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Hyperlinks -->
-            <div class="footer-column">
-                <h3>Important Links</h3>
-                <ul>
-                    <li><a href="index.aspx">Home</a></li>
-                    <li><a href="about.aspx">About</a></li>
-                    <li><a href="shop.aspx">Shop</a></li>
-                    <li><a href="search.aspx">Search</a></li>
-                    <!-- Add more links as needed -->
-                </ul>
-            </div>
 
-            <!-- Contact Us -->
-            <div class="footer-column">
-                <h3>Contact Us</h3>
-                <ul>
-                    <li><a href="contact.aspx">Contact</a></li>
-                </ul>
-            </div>
         </div>
+    </footer>
 
-        
-    </div>
-</footer>
 
-  
 </body>
 </html>

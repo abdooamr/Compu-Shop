@@ -10,7 +10,7 @@ using System.Configuration;
 
 public partial class signup : System.Web.UI.Page
 {
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -25,6 +25,7 @@ public partial class signup : System.Web.UI.Page
         string address = addressbox.Text;
         string city = citybox.Text;
         string password = passbox.Text;
+        int isadmin = 0;
 
         using (con)
         {
@@ -44,8 +45,8 @@ public partial class signup : System.Web.UI.Page
             }
 
             // Email is unique, proceed with signup
-            string insertQuery = "INSERT INTO customers (firstname, lastname, email, address, city, password) " +
-                                 "VALUES (@FirstName, @LastName, @Email, @Address, @City, @Password)";
+            string insertQuery = "INSERT INTO customers (firstname, lastname, email, address, city, password,isadmin) " +
+                                 "VALUES (@FirstName, @LastName, @Email, @Address, @City, @Password,@IsAdmin)";
             SqlCommand cmd = new SqlCommand(insertQuery, con);
             cmd.Parameters.AddWithValue("@FirstName", firstName);
             cmd.Parameters.AddWithValue("@LastName", lastName);
@@ -53,6 +54,7 @@ public partial class signup : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@Address", address);
             cmd.Parameters.AddWithValue("@City", city);
             cmd.Parameters.AddWithValue("@Password", password);
+            cmd.Parameters.AddWithValue("@IsAdmin", isadmin);
 
             con.Open();
             int rowsAffected = cmd.ExecuteNonQuery();

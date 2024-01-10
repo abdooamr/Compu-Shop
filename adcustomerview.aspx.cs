@@ -22,12 +22,12 @@ public partial class adcustomerview : System.Web.UI.Page
             BindCustomers();
         }
     }
-    
+
     private void BindCustomers()
     {
         // Retrieve customer data from the database
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-        string query = "SELECT CustomerId, firstname, lastname, email, address, city,IsAdmin FROM customers";
+        string query = "SELECT CustomerId, firstname, lastname, email, address, city,IsAdmin FROM Customers";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             SqlCommand command = new SqlCommand(query, connection);
@@ -40,7 +40,7 @@ public partial class adcustomerview : System.Web.UI.Page
             customersGridView.DataBind();
         }
     }
-    
+
     protected void backButton_Click(object sender, EventArgs e)
     {
         Response.Redirect("adminpanel.aspx");
@@ -53,7 +53,7 @@ public partial class adcustomerview : System.Web.UI.Page
 
         // Delete the customer from the database
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-        string query = "DELETE FROM customers WHERE id = @CustomerId";
+        string query = "DELETE FROM Customers WHERE id = @CustomerId";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             SqlCommand command = new SqlCommand(query, connection);
@@ -80,7 +80,7 @@ public partial class adcustomerview : System.Web.UI.Page
 
         // Update the IsAdmin field to 1 in the database for the selected customer
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-        string query = "UPDATE customers SET IsAdmin = 1 WHERE CustomerId = @CustomerId";
+        string query = "UPDATE Customers SET IsAdmin = 1 WHERE CustomerId = @CustomerId";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -113,7 +113,7 @@ public partial class adcustomerview : System.Web.UI.Page
 
         // Update the IsAdmin field to 0 in the database for the selected customer
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-        string query = "UPDATE customers SET IsAdmin = 0 WHERE CustomerId = @CustomerId";
+        string query = "UPDATE Customers SET IsAdmin = 0 WHERE CustomerId = @CustomerId";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
