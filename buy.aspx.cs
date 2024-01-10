@@ -40,7 +40,7 @@ public partial class buy : System.Web.UI.Page
 
                 // Retrieve product details from the database
                 string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                string query = "SELECT product_name, price , image_url FROM Product WHERE product_id = @ProductID";
+                string query = "SELECT product_name, price , stock, image_url FROM Product WHERE product_id = @ProductID";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -56,10 +56,28 @@ public partial class buy : System.Web.UI.Page
                             {
                                 string productName = reader["product_name"].ToString();
                                 string productPrice = reader["price"].ToString();
+                                int stock = Convert.ToInt32(reader["stock"]);
                                 string imageUrl = reader["image_url"].ToString();
 
                                 lblProductName.Text = productName;
                                 lblProductPrice.Text = productPrice;
+                                if (stock <= 5 && stock != 0)
+                                {
+                                    lblProductStock.ForeColor = System.Drawing.Color.Red;
+                                    lblProductStock.Text = "Hurry Up the product is running out of stock. the remaining stock is " + stock.ToString();
+
+                                }
+                                else if (stock == 0)
+                                {
+                                    lblProductStock.ForeColor = System.Drawing.Color.Red;
+                                    lblProductStock.Text = "Out of Stock";
+                                    Button1.Enabled = false;
+                                }
+                                else
+                                {
+                                    lblProductStock.ForeColor = System.Drawing.Color.Green;
+                                    lblProductStock.Text = "In Stock";
+                                }
                                 imgProduct.ImageUrl = imageUrl;
 
                             }
