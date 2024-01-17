@@ -21,7 +21,8 @@ Compu Shop is a state-of-the-art online platform built on ASP.NET, offering an e
 ### Prerequisites
 
 - ASP.NET installed on your development environment.
-- [Database](#) set up with the necessary tables (provide instructions or scripts if applicable).
+- [Database](database.md) set up with the necessary tables (provide instructions or scripts if applicable).
+
 
 ### Installation
 
