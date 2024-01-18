@@ -36,7 +36,7 @@ Compu Shop is a state-of-the-art online platform built on ASP.NET, offering an e
 
 ## Issues
 
-If you encounter any issues or have suggestions for improvement, please open an issue on the [Issues](https://github.com/your-username/CompuShop/issues) page.
+If you encounter any issues or have suggestions for improvement, please open an issue on the [Issues](https://github.com/abdooamr/CompuShop/issues) page.
 
 ## License
 
